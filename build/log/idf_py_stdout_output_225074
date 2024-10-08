@@ -1,0 +1,227 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x400490cc
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x1918
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xe5c
+load:0x403cb700,len:0x303c
+entry 0x403c893c
+[0;32mI (26) boot: ESP-IDF v5.3.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Oct  5 2024 16:29:09[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.1[0m
+[0;32mI (34) qio_mode: Enabling default flash chip QIO[0m
+[0;32mI (39) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (44) boot.esp32s3: SPI Mode       : QIO[0m
+[0;32mI (49) boot.esp32s3: SPI Flash Size : 16MB[0m
+[0;32mI (54) boot: Enabling RNG early entropy source...[0m
+[0;32mI (59) boot: Partition Table:[0m
+[0;32mI (63) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (70) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (77) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (85) boot:  2 factory          factory app      00 00 00010000 00177000[0m
+[0;32mI (92) boot: End of partition table[0m
+[0;32mI (97) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=33d44h (212292) map[0m
+[0;32mI (137) esp_image: segment 1: paddr=00043d6c vaddr=3fc95f00 size=03270h ( 12912) load[0m
+[0;32mI (140) esp_image: segment 2: paddr=00046fe4 vaddr=40374000 size=09034h ( 36916) load[0m
+[0;32mI (150) esp_image: segment 3: paddr=00050020 vaddr=42000020 size=53908h (342280) map[0m
+[0;32mI (203) esp_image: segment 4: paddr=000a3930 vaddr=4037d034 size=08e00h ( 36352) load[0m
+[0;32mI (211) esp_image: segment 5: paddr=000ac738 vaddr=600fe100 size=00004h (     4) load[0m
+[0;32mI (218) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (219) boot: Disabling RNG early entropy source...[0m
+[0;32mI (232) octal_psram: ECC is enabled[0m
+[0;32mI (233) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (233) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (236) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (242) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (247) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (252) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (257) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (263) octal_psram: BurstType    : 0x00 ( Wrap)[0m
+[0;32mI (268) octal_psram: BurstLen     : 0x03 (1024 Byte)[0m
+[0;32mI (274) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (280) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (286) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (291) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (295) esp_psram: Speed: 80MHz[0m
+[0;32mI (319) mmu_psram: Read only data copied and mapped to SPIRAM[0m
+[0;32mI (351) mmu_psram: Instructions copied and mapped to SPIRAM[0m
+[0;32mI (351) cpu_start: Multicore app[0m
+[0;32mI (737) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (746) cpu_start: Pro cpu start user code[0m
+[0;32mI (746) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (746) app_init: Application information:[0m
+[0;32mI (749) app_init: Project name:     esp_idf_v5.0_tembed[0m
+[0;32mI (755) app_init: App version:      1[0m
+[0;32mI (759) app_init: Compile time:     Oct  5 2024 16:29:01[0m
+[0;32mI (765) app_init: ELF file SHA256:  1b72b15e06f042c2...[0m
+[0;32mI (771) app_init: ESP-IDF:          v5.3.1-dirty[0m
+[0;32mI (776) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (781) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (786) efuse_init: Chip rev:         v0.1[0m
+[0;32mI (791) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (798) heap_init: At 3FCA2180 len 00047590 (285 KiB): RAM[0m
+[0;32mI (804) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (810) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (816) heap_init: At 600FE104 len 00001EE4 (7 KiB): RTCRAM[0m
+[0;32mI (823) esp_psram: Adding pool of 7040K of PSRAM memory to heap allocator[0m
+[0;32mI (830) spi_flash: detected chip: gd[0m
+[0;32mI (834) spi_flash: flash io: qio[0m
+[0;32mI (838) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (845) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (852) main_task: Started on CPU0[0m
+[0;32mI (862) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (862) main_task: Calling app_main()[0m
+[0;32mI (872) tembed: Hello lcd![0m
+This is esp32s3 chip with 2 CPU core(s), WiFi/BLE, silicon revision v0.1, 16MB external flash
+Minimum free heap size: 7506084 bytes
+[0;32mI (882) gpio: GPIO[46]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (892) APA102: Init clk:45 data:42[0m
+[0;32mI (902) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (902) gpio: GPIO[45]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (912) lcd: Backlight off[0m
+[0;32mI (922) gpio: GPIO[15]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (932) lcd: Init SPI bus[0m
+[0;32mI (932) lcd: Init panel io[0m
+[0;32mI (932) gpio: GPIO[13]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (942) lcd: Attach panel[0m
+[0;32mI (952) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (962) lcd: Init lcd[0m
+[0;32mI (2082) lcd: Enable lcd[0m
+[0;32mI (2082) lcd: Backlight on[0m
+[0;32mI (2082) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2082) gpio: GPIO[2]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:3 [0m
+[0;32mI (2092) gpio: GPIO[1]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:3 [0m
+[0;32mI (2102) Knob: Iot Knob Config Succeed, encoder A:2, encoder B:1, direction:0, Version: 0.1.0[0m
+[0;32mI (2112) tembed: LEDS[0m
+[0;32mI (2112) APA102: Init clk:45 data:42[0m
+[0;32mI (2122) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2122) gpio: GPIO[45]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2132) APA102: Init clk:45 data:42[0m
+[0;32mI (2142) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2152) gpio: GPIO[45]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2162) lvgl: Init[0m
+[0;32mI (2162) lvgl: Register display[0m
+[0;32mI (2162) lvgl: Tick timer[0m
+[0;32mI (2172) tembed: Display LVGL[0m
+[0;32mI (155102) tembed: Down![0m
+[0;32mI (156732) tembed: KNOB: KNOB_LEFT Count is -1[0m
+[0;32mI (156872) tembed: KNOB: KNOB_LEFT Count is -2[0m
+[0;32mI (157712) tembed: KNOB: KNOB_RIGHT Count is -1[0m
+[0;32mI (157822) tembed: KNOB: KNOB_RIGHT Count is 0[0m
+[0;32mI (158222) tembed: KNOB: KNOB_RIGHT Count is 1[0m
+[0;32mI (158252) tembed: KNOB: KNOB_RIGHT Count is 2[0m
+[0;32mI (158352) tembed: KNOB: KNOB_RIGHT Count is 3[0m
+[0;32mI (158952) tembed: Down![0m
+[0;32mI (168022) tembed: KNOB: KNOB_RIGHT Count is 4[0m
+[0;32mI (168082) tembed: KNOB: KNOB_RIGHT Count is 5[0m
+[0;32mI (168142) tembed: KNOB: KNOB_RIGHT Count is 6[0m
+[0;32mI (168842) tembed: KNOB: KNOB_RIGHT Count is 7[0m
+[0;32mI (168872) tembed: KNOB: KNOB_RIGHT Count is 8[0m
+[0;32mI (168952) tembed: KNOB: KNOB_RIGHT Count is 9[0m
+[0;32mI (169012) tembed: KNOB: KNOB_RIGHT Count is 10[0m
+[0;32mI (169472) tembed: KNOB: KNOB_RIGHT Count is 11[0m
+[0;32mI (169502) tembed: KNOB: KNOB_RIGHT Count is 12[0m
+[0;32mI (170132) tembed: KNOB: KNOB_RIGHT Count is 13[0m
+[0;32mI (170192) tembed: KNOB: KNOB_RIGHT Count is 14[0m
+[0;32mI (170752) tembed: KNOB: KNOB_RIGHT Count is 15[0m
+[0;32mI (170802) tembed: KNOB: KNOB_RIGHT Count is 16[0m
+[0;32mI (170932) tembed: KNOB: KNOB_RIGHT Count is 17[0m
+[0;32mI (171652) tembed: KNOB: KNOB_LEFT Count is 16[0m
+[0;32mI (171742) tembed: KNOB: KNOB_LEFT Count is 15[0m
+[0;32mI (171812) tembed: KNOB: KNOB_LEFT Count is 14[0m
+[0;32mI (172292) tembed: KNOB: KNOB_LEFT Count is 13[0m
+[0;32mI (172422) tembed: KNOB: KNOB_LEFT Count is 12[0m
+[0;32mI (172482) tembed: KNOB: KNOB_LEFT Count is 11[0m
+[0;32mI (172922) tembed: KNOB: KNOB_LEFT Count is 10[0m
+[0;32mI (172952) tembed: KNOB: KNOB_LEFT Count is 9[0m
+[0;32mI (172992) tembed: KNOB: KNOB_LEFT Count is 8[0m
+[0;32mI (239492) tembed: KNOB: KNOB_LEFT Count is 7[0m
+[0;32mI (242692) tembed: KNOB: KNOB_RIGHT Count is 8[0m
+[0;32mI (242902) tembed: KNOB: KNOB_RIGHT Count is 9[0m
+[0;32mI (242962) tembed: KNOB: KNOB_RIGHT Count is 10[0m
+[0;32mI (243452) tembed: KNOB: KNOB_RIGHT Count is 11[0m
+[0;32mI (243962) tembed: Down![0m
+[0;32mI (244922) tembed: KNOB: KNOB_RIGHT Count is 12[0m
+[0;32mI (245042) tembed: KNOB: KNOB_RIGHT Count is 13[0m
+[0;32mI (245072) tembed: KNOB: KNOB_RIGHT Count is 14[0m
+[0;32mI (245122) tembed: KNOB: KNOB_RIGHT Count is 15[0m
+[0;32mI (245172) tembed: KNOB: KNOB_RIGHT Count is 16[0m
+[0;32mI (245232) tembed: KNOB: KNOB_RIGHT Count is 17[0m
+[0;32mI (245282) tembed: KNOB: KNOB_RIGHT Count is 18[0m
+[0;32mI (245402) tembed: KNOB: KNOB_RIGHT Count is 19[0m
+[0;32mI (245422) tembed: KNOB: KNOB_RIGHT Count is 20[0m
+[0;32mI (245452) tembed: KNOB: KNOB_RIGHT Count is 21[0m
+[0;32mI (245502) tembed: KNOB: KNOB_RIGHT Count is 22[0m
+[0;32mI (245532) tembed: KNOB: KNOB_RIGHT Count is 23[0m
+[0;32mI (245552) tembed: KNOB: KNOB_RIGHT Count is 24[0m
+[0;32mI (245562) tembed: KNOB: KNOB_RIGHT Count is 25[0m
+[0;32mI (245582) tembed: KNOB: KNOB_RIGHT Count is 26[0m
+[0;32mI (245642) tembed: KNOB: KNOB_RIGHT Count is 27[0m
+[0;32mI (245672) tembed: KNOB: KNOB_RIGHT Count is 28[0m
+[0;32mI (245702) tembed: KNOB: KNOB_RIGHT Count is 29[0m
+[0;32mI (245742) tembed: KNOB: KNOB_RIGHT Count is 30[0m
+[0;32mI (245782) tembed: KNOB: KNOB_RIGHT Count is 31[0m
+[0;32mI (245812) tembed: KNOB: KNOB_RIGHT Count is 32[0m
+[0;32mI (245872) tembed: KNOB: KNOB_RIGHT Count is 33[0m
+[0;32mI (245882) tembed: KNOB: KNOB_RIGHT Count is 34[0m
+[0;32mI (245902) tembed: KNOB: KNOB_RIGHT Count is 35[0m
+[0;32mI (246022) tembed: KNOB: KNOB_RIGHT Count is 36[0m
+[0;32mI (246062) tembed: KNOB: KNOB_RIGHT Count is 37[0m
+[0;32mI (246082) tembed: KNOB: KNOB_RIGHT Count is 38[0m
+[0;32mI (246102) tembed: KNOB: KNOB_RIGHT Count is 39[0m
+[0;32mI (246152) tembed: KNOB: KNOB_RIGHT Count is 40[0m
+[0;32mI (246212) tembed: KNOB: KNOB_RIGHT Count is 41[0m
+[0;32mI (246242) tembed: KNOB: KNOB_RIGHT Count is 42[0m
+[0;32mI (246282) tembed: KNOB: KNOB_RIGHT Count is 43[0m
+[0;32mI (246322) tembed: KNOB: KNOB_RIGHT Count is 44[0m
+[0;32mI (246352) tembed: KNOB: KNOB_RIGHT Count is 45[0m
+[0;32mI (246382) tembed: KNOB: KNOB_RIGHT Count is 46[0m
+[0;32mI (246412) tembed: KNOB: KNOB_RIGHT Count is 47[0m
+[0;32mI (246542) tembed: KNOB: KNOB_RIGHT Count is 48[0m
+[0;32mI (246742) tembed: KNOB: KNOB_RIGHT Count is 49[0m
+[0;32mI (247272) tembed: Down![0m
+B): RTCRAM[0m
+[0;32mI (823) esp_psram: Adding pool of 7040K of PSRAM memory to heap allocator[0m
+[0;32mI (831) spi_flash: detected chip: gd[0m
+[0;32mI (835) spi_flash: flash io: qio[0m
+[0;32mI (839) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (846) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (853) main_task: Started on CPU0[0m
+[0;32mI (863) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (863) main_task: Calling app_main()[0m
+[0;32mI (873) tembed: Hello lcd![0m
+This is esp32s3 chip with 2 CPU core(s), WiFi/BLE, silicon revision v0.1, 16MB external flash
+Minimum free heap size: 7506084 bytes
+[0;32mI (883) gpio: GPIO[46]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (893) APA102: Init clk:45 data:42[0m
+[0;32mI (903) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (903) gpio: GPIO[45]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (913) lcd: Backlight off[0m
+[0;32mI (923) gpio: GPIO[15]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (933) lcd: Init SPI bus[0m
+[0;32mI (933) lcd: Init panel io[0m
+[0;32mI (933) gpio: GPIO[13]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (943) lcd: Attach panel[0m
+[0;32mI (953) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (963) lcd: Init lcd[0m
+[0;32mI (2083) lcd: Enable lcd[0m
+[0;32mI (2083) lcd: Backlight on[0m
+[0;32mI (2083) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2083) gpio: GPIO[2]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:3 [0m
+[0;32mI (2093) gpio: GPIO[1]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:3 [0m
+[0;32mI (2103) Knob: Iot Knob Config Succeed, encoder A:2, encoder B:1, direction:0, Version: 0.1.0[0m
+[0;32mI (2113) tembed: LEDS[0m
+[0;32mI (2113) APA102: Init clk:45 data:42[0m
+[0;32mI (2123) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2123) gpio: GPIO[45]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2133) APA102: Init clk:45 data:42[0m
+[0;32mI (2143) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2153) gpio: GPIO[45]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2163) lvgl: Init[0m
+[0;32mI (2163) lvgl: Register display[0m
+[0;32mI (2163) lvgl: Tick timer[0m
+[0;32mI (2173) tembed: Display LVGL[0m

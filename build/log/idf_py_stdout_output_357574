@@ -1,0 +1,72 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cd /home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python /home/david/esp/v5.3.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader/bootloader.bin
+Bootloader binary size 0x5810 bytes. 0x27f0 bytes (31%) free.
+[2/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/tembed_main.c.obj
+[3/8] Linking C static library esp-idf/main/libmain.a
+[4/8] Generating ld/sections.ld
+[5/8] Linking CXX executable esp_idf_v5.0_tembed.elf
+[6/8] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated /home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/esp_idf_v5.0_tembed.bin
+[7/8] cd /home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python /home/david/esp/v5.3.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/partition_table/partition-table.bin /home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/esp_idf_v5.0_tembed.bin
+esp_idf_v5.0_tembed.bin binary size 0x9c590 bytes. Smallest app partition is 0x177000 bytes. 0xdaa70 bytes (58%) free.
+[7/8] cd /home/david/esp/v5.3.1/esp-idf/components/esptool_py && /home/david/.espressif/tools/cmake/3.24.0/bin/cmake -D IDF_PATH=/home/david/esp/v5.3.1/esp-idf -D "SERIAL_TOOL=/home/david/.espressif/python_env/idf5.3_py3.12_env/bin/python;;/home/david/esp/v5.3.1/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32s3" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build -P /home/david/esp/v5.3.1/esp-idf/components/esptool_py/run_serial_tool.cmake
+esptool.py --chip esp32s3 -p /dev/ttyACM0 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size detect 0x0 bootloader/bootloader.bin 0x10000 esp_idf_v5.0_tembed.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.8.1
+Serial port /dev/ttyACM0
+Connecting...
+Chip is ESP32-S3 (QFN56) (revision v0.1)
+Features: WiFi, BLE, Embedded PSRAM 8MB (AP_3v3)
+Crystal is 40MHz
+MAC: 34:85:18:92:30:2c
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Auto-detected Flash size: 16MB
+Flash will be erased from 0x00000000 to 0x00005fff...
+Flash will be erased from 0x00010000 to 0x000acfff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+SHA digest in image updated
+Compressed 22544 bytes to 13927...
+Writing at 0x00000000... (100 %)
+Wrote 22544 bytes (13927 compressed) at 0x00000000 in 0.3 seconds (effective 517.3 kbit/s)...
+Hash of data verified.
+Compressed 640400 bytes to 369324...
+Writing at 0x00010000... (4 %)
+Writing at 0x0001c74a... (8 %)
+Writing at 0x000260a1... (13 %)
+Writing at 0x0002f754... (17 %)
+Writing at 0x0003c0eb... (21 %)
+Writing at 0x00048655... (26 %)
+Writing at 0x0004db94... (30 %)
+Writing at 0x00053825... (34 %)
+Writing at 0x00059258... (39 %)
+Writing at 0x0005ee47... (43 %)
+Writing at 0x00063dd6... (47 %)
+Writing at 0x00069058... (52 %)
+Writing at 0x0006e473... (56 %)
+Writing at 0x00073fbe... (60 %)
+Writing at 0x00079866... (65 %)
+Writing at 0x0007e8b1... (69 %)
+Writing at 0x00083ac7... (73 %)
+Writing at 0x00088b5a... (78 %)
+Writing at 0x0008e3b8... (82 %)
+Writing at 0x00094053... (86 %)
+Writing at 0x0009d3bc... (91 %)
+Writing at 0x000a31de... (95 %)
+Writing at 0x000a90de... (100 %)
+Wrote 640400 bytes (369324 compressed) at 0x00010000 in 4.4 seconds (effective 1168.5 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 105...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (105 compressed) at 0x00008000 in 0.0 seconds (effective 516.2 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
