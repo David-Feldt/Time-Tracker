@@ -1907,7 +1907,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_tembed_
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /home/david/.espressif/tools/cmake/3.24.0/bin/cmake --regenerate-during-build -S/home/david/T-Embed/Time-Tracker/esp-idf-v5.0 -B/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build
+  command = /home/david/.espressif/tools/cmake/3.24.0/bin/cmake --regenerate-during-build -S/home/david/T-Embed/Time-Tracker/time_tracker -B/home/david/T-Embed/Time-Tracker/time_tracker/build
   description = Re-running CMake...
   generator = 1
 

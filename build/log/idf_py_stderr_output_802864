@@ -1,0 +1,397 @@
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/ttyACM0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40048ede: recv_packet in ROM
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0;33m--- 0x420103d3: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:291 (discriminator 1)
+[0m
+[0;33m--- 0x42010a49: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:283
+0x42010a50: lv_obj_get_disp at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_tree.c:280 (discriminator 2)
+[0m
+[0;33m--- 0x420103d0: lv_obj_get_local_style_prop at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_style.c:289
+0x4200c83d: lv_obj_set_width at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:229
+ (inlined by) lv_obj_set_size at /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl/src/core/lv_obj_pos.c:219
+0x4200a21d: lvgl_circle_ui at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:202
+0x4200a30a: app_main at /home/david/T-Embed/Time-Tracker/time_tracker/main/tembed_main.c:256
+0x42053f4f: main_task at /home/david/esp/v5.3.1/esp-idf/components/freertos/app_startup.c:208
+[0m
+[0;33m--- 0x40375e3c: esp_restart_noos at /home/david/esp/v5.3.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:158
+[0m
+[0m

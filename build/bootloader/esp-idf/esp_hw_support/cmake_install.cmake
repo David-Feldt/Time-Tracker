@@ -39,11 +39,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader/esp-idf/esp_hw_support/port/esp32s3/cmake_install.cmake")
+  include("/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader/esp-idf/esp_hw_support/port/esp32s3/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader/esp-idf/esp_hw_support/lowpower/cmake_install.cmake")
+  include("/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader/esp-idf/esp_hw_support/lowpower/cmake_install.cmake")
 endif()
 

@@ -87,17 +87,41 @@ void leds(tembed_t tembed) {
 }
 
 lv_obj_t *count_label;
+int state = 0;
+int n = 3;
+lv_obj_t *labels[3];
+
+void update_labels(){
+    int num_labels = 3;
+    int radius = 75;
+    for (int i = 0; i < num_labels; i++) { 
+        int j = (i + state) % num_labels;
+
+        // Calculate the angle for the label
+        float angle = (2 * M_PI / num_labels) * j; // Evenly distribute around the circle
+        int x = radius * cos(angle) -75;
+        int y = radius * sin(angle);
+
+        // Align the label to the center of the calculated position
+        lv_obj_align(labels[i], LV_ALIGN_CENTER, x, y);
+    }
+}
 
 static void knob_left_cb(void *arg, void *data)
 {
     ESP_LOGI(TAG, "KNOB: KNOB_LEFT Count is %d", iot_knob_get_count_value((knob_handle_t)arg));
-    lv_label_set_text_fmt(count_label,"%d",iot_knob_get_count_value((knob_handle_t)arg));
+    state = (state + 1) % n;
+    update_labels();
+    //lv_label_set_text_fmt(count_label,"%d",iot_knob_get_count_value((knob_handle_t)arg));
 }
 
 static void knob_right_cb(void *arg, void *data)
 {
     ESP_LOGI(TAG, "KNOB: KNOB_RIGHT Count is %d", iot_knob_get_count_value((knob_handle_t)arg));
-    lv_label_set_text_fmt(count_label,"%d",iot_knob_get_count_value((knob_handle_t)arg));
+    //v_label_set_text_fmt(count_label,"%d",iot_knob_get_count_value((knob_handle_t)arg));
+    state = (state - 1) % n;
+    update_labels();
+
 }
 
 static void button_press_down_cb(void *arg, void *data) {
@@ -124,35 +148,33 @@ void lvgl_demo_ui(lv_disp_t *disp) {
     lv_obj_set_flex_flow(cont_row, LV_FLEX_FLOW_ROW);
     lv_obj_set_style_bg_color(cont_row, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
 
-    lv_obj_t * label;
-
     /*Add items to the row*/
-    label = lv_label_create(cont_row);
-    lv_label_set_text_static(label, "RED");
-    lv_obj_add_style(label, &l_style, LV_PART_MAIN);
-    lv_obj_set_style_bg_color(label, lv_color_hex(0xff0000), LV_PART_MAIN);
-    lv_obj_center(label);
+    // label = lv_label_create(cont_row);
+    // lv_label_set_text_static(label, "RED");
+    // lv_obj_add_style(label, &l_style, LV_PART_MAIN);
+    // lv_obj_set_style_bg_color(label, lv_color_hex(0xff0000), LV_PART_MAIN);
+    // lv_obj_center(label);
 
-    label = lv_label_create(cont_row);
-    lv_label_set_text_static(label, "GREEN");
-    lv_obj_add_style(label, &l_style, LV_PART_MAIN);
-    lv_obj_set_style_bg_color(label, lv_palette_main(LV_PALETTE_GREEN), LV_PART_MAIN);
-    lv_obj_center(label);
+    // label = lv_label_create(cont_row);
+    // lv_label_set_text_static(label, "GREEN");
+    // lv_obj_add_style(label, &l_style, LV_PART_MAIN);
+    // lv_obj_set_style_bg_color(label, lv_palette_main(LV_PALETTE_GREEN), LV_PART_MAIN);
+    // lv_obj_center(label);
 
-    label = lv_label_create(cont_row);
-    lv_label_set_text_static(label, "BLUE");
-    lv_obj_add_style(label, &l_style, LV_PART_MAIN);
-    lv_obj_set_style_bg_color(label, lv_palette_main(LV_PALETTE_BLUE), LV_PART_MAIN);
-    lv_obj_center(label);
+    // label = lv_label_create(cont_row);
+    // lv_label_set_text_static(label, "BLUE");
+    // lv_obj_add_style(label, &l_style, LV_PART_MAIN);
+    // lv_obj_set_style_bg_color(label, lv_palette_main(LV_PALETTE_BLUE), LV_PART_MAIN);
+    // lv_obj_center(label);
 
 
     // Create a white label, set its text and align it to the center
-    count_label = lv_label_create(lv_disp_get_scr_act(disp));
-    lv_label_set_text(count_label, "0");
-    lv_obj_set_style_text_color(count_label, lv_color_hex(0xffffff), LV_PART_MAIN);
-    lv_obj_align(count_label, LV_ALIGN_BOTTOM_MID, 0, 0);
-    lv_obj_set_style_bg_color(count_label, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
-    lv_obj_set_style_bg_opa(count_label, LV_OPA_COVER, LV_PART_MAIN);
+    // count_label = lv_label_create(lv_disp_get_scr_act(disp));
+    // lv_label_set_text(count_label, "0");
+    // lv_obj_set_style_text_color(count_label, lv_color_hex(0xffffff), LV_PART_MAIN);
+    // lv_obj_align(count_label, LV_ALIGN_BOTTOM_MID, 0, 0);
+    // lv_obj_set_style_bg_color(count_label, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
+    // lv_obj_set_style_bg_opa(count_label, LV_OPA_COVER, LV_PART_MAIN);
 }
 void lvgl_circle_ui(lv_disp_t *disp) {
     /* Change the active screen's background color */
@@ -176,26 +198,38 @@ void lvgl_circle_ui(lv_disp_t *disp) {
     lv_style_set_bg_opa(&l_style, LV_OPA_COVER);
 
     /* Create labels around the circle */
-    const char *colors[] = {"RED", "GREEN", "BLUE"};
+    const char *labels_text[] = {"Task 1", "Task 2", "Task 3"};
     const lv_color_t colors_hex[] = {lv_color_hex(0xff0000), lv_palette_main(LV_PALETTE_GREEN), lv_palette_main(LV_PALETTE_BLUE)};
-    for (int i = 0; i < 3; i++) {
-        lv_obj_t *label = lv_label_create(circle_bg);
-        lv_label_set_text_static(label, colors[i]);
+    int radius = 75;
+    int num_labels = 3;
+    for (int i = 0; i < num_labels; i++) {
+        lv_obj_t *label = lv_label_create(lv_disp_get_scr_act(disp));
+        labels[i] = label;
+        lv_label_set_text_static(label, labels_text[i]);
         lv_obj_add_style(label, &l_style, LV_PART_MAIN);
         lv_obj_set_style_bg_color(label, colors_hex[i], LV_PART_MAIN);
-        lv_obj_align(label, LV_ALIGN_CENTER, (i - 1) * 100, 0); // Adjust positions
+
+        // Calculate the angle for the label
+        float angle = (2 * M_PI / num_labels) * i; // Evenly distribute around the circle
+        int x = radius * cos(angle) -75;
+        int y = radius * sin(angle);
+
+        // Align the label to the center of the calculated position
+        lv_obj_align(label, LV_ALIGN_CENTER, x, y);
+        lv_obj_set_size(label, 60, 20); // Adjust size as needed
         lv_obj_set_style_radius(label, 20, LV_PART_MAIN); // Rounded corners
     }
+    update_labels();
 
     // Create a central rectangular label
-    count_label = lv_label_create(lv_disp_get_scr_act(disp));
-    lv_label_set_text(count_label, "0");
-    lv_obj_set_style_text_color(count_label, lv_color_hex(0xffffff), LV_PART_MAIN);
-    lv_obj_align(count_label, LV_ALIGN_CENTER, 25, 0);
-    lv_obj_set_style_bg_color(count_label, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
-    lv_obj_set_style_bg_opa(count_label, LV_OPA_COVER, LV_PART_MAIN);
-    lv_obj_set_size(count_label, 100, 20); // Adjust size as needed
-    lv_obj_set_style_radius(count_label, 10, LV_PART_MAIN); // Rounded corners
+    // count_label = lv_label_create(lv_disp_get_scr_act(disp));
+    // lv_label_set_text(count_label, "0");
+    // lv_obj_set_style_text_color(count_label, lv_color_hex(0xffffff), LV_PART_MAIN);
+    // lv_obj_align(count_label, LV_ALIGN_CENTER, 25, 0);
+    // lv_obj_set_style_bg_color(count_label, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
+    // lv_obj_set_style_bg_opa(count_label, LV_OPA_COVER, LV_PART_MAIN);
+    // lv_obj_set_size(count_label, 100, 20); // Adjust size as needed
+    // lv_obj_set_style_radius(count_label, 10, LV_PART_MAIN); // Rounded corners
 }
 
 void app_main(void)
@@ -239,14 +273,14 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Display LVGL");
     lvgl_circle_ui(lvgl_disp);
-    turn_off_device();
+    //turn_off_device();
 
-    // while (1) {
-    //     // raise the task priority of LVGL and/or reduce the handler period can improve the performance
-    //     vTaskDelay(pdMS_TO_TICKS(10));
-    //     // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
-    //     lv_timer_handler();
-    // }
+    while (1) {
+        // raise the task priority of LVGL and/or reduce the handler period can improve the performance
+        vTaskDelay(pdMS_TO_TICKS(10));
+        // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
+        lv_timer_handler();
+    }
     // turn_off_device();
 
 }

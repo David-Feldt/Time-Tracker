@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "/home/david/esp/v5.3.1/esp-idf/components/bootloader/subproject"
-  "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader"
-  "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix"
-  "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix/tmp"
-  "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix/src/bootloader-stamp"
-  "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix/src"
-  "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader"
+  "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix"
+  "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix/tmp"
+  "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix/src"
+  "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/david/T-Embed/Time-Tracker/esp-idf-v5.0/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/david/T-Embed/Time-Tracker/time_tracker/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()
