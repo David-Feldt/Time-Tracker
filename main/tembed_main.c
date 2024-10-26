@@ -15,8 +15,18 @@
 #include "tembed_lvgl.h"
 
 #define TAG "tembed"
+#define POWER_ON_GPIO 46
+
 
 // ... [LED code remains unchanged] ...
+
+void turn_off_device() {
+    // Set the GPIO pin as output
+    gpio_set_direction(POWER_ON_GPIO, GPIO_MODE_OUTPUT);
+    
+    // Set the GPIO pin low to turn off the device
+    gpio_set_level(POWER_ON_GPIO, 0);
+}
 
 #define LABEL_COUNT 3
 
@@ -240,6 +250,7 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Display LVGL");
     lvgl_demo_ui(lvgl_disp);
+    turn_off_device();
 
     while (1) {
         // LVGL timer handler
