@@ -1,5 +1,0 @@
-[1/4] cd /home/david/Time-Tracker/build/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.4_py3.10_env/bin/python /home/david/esp/v5.3.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/david/Time-Tracker/build/partition_table/partition-table.bin /home/david/Time-Tracker/build/esp_idf_v5.0_tembed.bin
-esp_idf_v5.0_tembed.bin binary size 0x98920 bytes. Smallest app partition is 0x177000 bytes. 0xde6e0 bytes (59%) free.
-[2/4] Performing build step for 'bootloader'
-[1/1] cd /home/david/Time-Tracker/build/bootloader/esp-idf/esptool_py && /home/david/.espressif/python_env/idf5.4_py3.10_env/bin/python /home/david/esp/v5.3.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/david/Time-Tracker/build/bootloader/bootloader.bin
-Bootloader binary size 0x5a50 bytes. 0x25b0 bytes (29%) free.

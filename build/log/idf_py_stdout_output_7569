@@ -1,0 +1,64 @@
+-- Found Git: /opt/homebrew/bin/git (found version "2.47.1")
+-- The C compiler identification is GNU 11.2.0
+-- The CXX compiler identification is GNU 11.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /Users/david/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Users/david/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Users/david/.espressif/tools/xtensa-esp32s3-elf/esp-2022r1-11.2.0/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building ESP-IDF components for target esp32s3
+NOTICE: 
+Following dependencies have new versions available:
+Dependency "espressif/button": "2.5.0" -> "2.5.6"
+Dependency "espressif/knob": "0.1.0" -> "0.1.5"
+Dependency "lvgl/lvgl": "8.3.0" -> "9.2.2"
+Consider running "idf.py update-dependencies" to update your lock file.
+NOTICE: Processing 4 dependencies:
+NOTICE: [1/4] espressif/button (2.5.0)
+NOTICE: [2/4] espressif/knob (0.1.0)
+NOTICE: [3/4] lvgl/lvgl (8.3.0)
+NOTICE: [4/4] idf (5.0.8)
+-- Project sdkconfig file /Users/david/Projects/Time-Tracker/sdkconfig
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of time_t
+-- Check size of time_t - done
+-- Found Python3: /Users/david/.espressif/python_env/idf5.0_py3.13_env/bin/python (found version "3.13.2") found components: Interpreter
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - no
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Could NOT find Threads (missing: Threads_FOUND) 
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS - Success
+-- App "esp_idf_v5.0_tembed" version: a7c4b2c-dirty
+-- Adding linker script /Users/david/Projects/Time-Tracker/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_system/ld/esp32s3/sections.ld.in
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.api.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.bt_funcs.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.libgcc.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.newlib.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.version.ld
+-- Adding linker script /Users/david/esp/v5.0/esp-idf/components/soc/esp32s3/ld/esp32s3.peripherals.ld
+-- knob: 0.1.0
+-- Components: apa102 app_trace app_update bootloader bootloader_support bt cmock console cxx driver efuse esp-tls esp_adc esp_app_format esp_common esp_eth esp_event esp_gdbstub esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_lcd esp_local_ctrl esp_netif esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_system esp_timer esp_wifi espcoredump espressif__button espressif__knob esptool_py fatfs freertos hal heap http_parser idf_test ieee802154 json log lvgl__lvgl lwip main mbedtls mqtt newlib nvs_flash openthread partition_table perfmon protobuf-c protocomm pthread sdmmc soc spi_flash spiffs tcp_transport tembed touch_element ulp unity usb vfs wear_levelling wifi_provisioning wpa_supplicant xtensa
+-- Component paths: /Users/david/Projects/Time-Tracker/components/apa102 /Users/david/esp/v5.0/esp-idf/components/app_trace /Users/david/esp/v5.0/esp-idf/components/app_update /Users/david/esp/v5.0/esp-idf/components/bootloader /Users/david/esp/v5.0/esp-idf/components/bootloader_support /Users/david/esp/v5.0/esp-idf/components/bt /Users/david/esp/v5.0/esp-idf/components/cmock /Users/david/esp/v5.0/esp-idf/components/console /Users/david/esp/v5.0/esp-idf/components/cxx /Users/david/esp/v5.0/esp-idf/components/driver /Users/david/esp/v5.0/esp-idf/components/efuse /Users/david/esp/v5.0/esp-idf/components/esp-tls /Users/david/esp/v5.0/esp-idf/components/esp_adc /Users/david/esp/v5.0/esp-idf/components/esp_app_format /Users/david/esp/v5.0/esp-idf/components/esp_common /Users/david/esp/v5.0/esp-idf/components/esp_eth /Users/david/esp/v5.0/esp-idf/components/esp_event /Users/david/esp/v5.0/esp-idf/components/esp_gdbstub /Users/david/esp/v5.0/esp-idf/components/esp_hid /Users/david/esp/v5.0/esp-idf/components/esp_http_client /Users/david/esp/v5.0/esp-idf/components/esp_http_server /Users/david/esp/v5.0/esp-idf/components/esp_https_ota /Users/david/esp/v5.0/esp-idf/components/esp_https_server /Users/david/esp/v5.0/esp-idf/components/esp_hw_support /Users/david/esp/v5.0/esp-idf/components/esp_lcd /Users/david/esp/v5.0/esp-idf/components/esp_local_ctrl /Users/david/esp/v5.0/esp-idf/components/esp_netif /Users/david/esp/v5.0/esp-idf/components/esp_partition /Users/david/esp/v5.0/esp-idf/components/esp_phy /Users/david/esp/v5.0/esp-idf/components/esp_pm /Users/david/esp/v5.0/esp-idf/components/esp_psram /Users/david/esp/v5.0/esp-idf/components/esp_ringbuf /Users/david/esp/v5.0/esp-idf/components/esp_rom /Users/david/esp/v5.0/esp-idf/components/esp_system /Users/david/esp/v5.0/esp-idf/components/esp_timer /Users/david/esp/v5.0/esp-idf/components/esp_wifi /Users/david/esp/v5.0/esp-idf/components/espcoredump /Users/david/Projects/Time-Tracker/managed_components/espressif__button /Users/david/Projects/Time-Tracker/managed_components/espressif__knob /Users/david/esp/v5.0/esp-idf/components/esptool_py /Users/david/esp/v5.0/esp-idf/components/fatfs /Users/david/esp/v5.0/esp-idf/components/freertos /Users/david/esp/v5.0/esp-idf/components/hal /Users/david/esp/v5.0/esp-idf/components/heap /Users/david/esp/v5.0/esp-idf/components/http_parser /Users/david/esp/v5.0/esp-idf/components/idf_test /Users/david/esp/v5.0/esp-idf/components/ieee802154 /Users/david/esp/v5.0/esp-idf/components/json /Users/david/esp/v5.0/esp-idf/components/log /Users/david/Projects/Time-Tracker/managed_components/lvgl__lvgl /Users/david/esp/v5.0/esp-idf/components/lwip /Users/david/Projects/Time-Tracker/main /Users/david/esp/v5.0/esp-idf/components/mbedtls /Users/david/esp/v5.0/esp-idf/components/mqtt /Users/david/esp/v5.0/esp-idf/components/newlib /Users/david/esp/v5.0/esp-idf/components/nvs_flash /Users/david/esp/v5.0/esp-idf/components/openthread /Users/david/esp/v5.0/esp-idf/components/partition_table /Users/david/esp/v5.0/esp-idf/components/perfmon /Users/david/esp/v5.0/esp-idf/components/protobuf-c /Users/david/esp/v5.0/esp-idf/components/protocomm /Users/david/esp/v5.0/esp-idf/components/pthread /Users/david/esp/v5.0/esp-idf/components/sdmmc /Users/david/esp/v5.0/esp-idf/components/soc /Users/david/esp/v5.0/esp-idf/components/spi_flash /Users/david/esp/v5.0/esp-idf/components/spiffs /Users/david/esp/v5.0/esp-idf/components/tcp_transport /Users/david/Projects/Time-Tracker/components/tembed /Users/david/esp/v5.0/esp-idf/components/touch_element /Users/david/esp/v5.0/esp-idf/components/ulp /Users/david/esp/v5.0/esp-idf/components/unity /Users/david/esp/v5.0/esp-idf/components/usb /Users/david/esp/v5.0/esp-idf/components/vfs /Users/david/esp/v5.0/esp-idf/components/wear_levelling /Users/david/esp/v5.0/esp-idf/components/wifi_provisioning /Users/david/esp/v5.0/esp-idf/components/wpa_supplicant /Users/david/esp/v5.0/esp-idf/components/xtensa
+-- Configuring done (6.0s)
+-- Generating done (0.2s)
+-- Build files have been written to: /Users/david/Projects/Time-Tracker/build

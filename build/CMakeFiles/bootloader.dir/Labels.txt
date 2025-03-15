@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/home/david/Time-Tracker/build/CMakeFiles/bootloader
-/home/david/Time-Tracker/build/CMakeFiles/bootloader.rule
-/home/david/Time-Tracker/build/CMakeFiles/bootloader-complete.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/home/david/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/Users/david/Projects/Time-Tracker/build/CMakeFiles/bootloader
+/Users/david/Projects/Time-Tracker/build/CMakeFiles/bootloader.rule
+/Users/david/Projects/Time-Tracker/build/CMakeFiles/bootloader-complete.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/david/Projects/Time-Tracker/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
