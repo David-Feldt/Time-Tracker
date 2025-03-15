@@ -50,6 +50,9 @@ static lv_obj_t *main_container;
 static lv_obj_t *left_panel;
 static lv_obj_t *right_panel;
 
+// Add this with the other forward declarations at the top
+static void button_long_press_cb(void *arg, void *data);
+
 void turn_off_device() {
     // Set the GPIO pin as output
     gpio_set_direction(POWER_ON_GPIO, GPIO_MODE_OUTPUT);
@@ -429,6 +432,32 @@ static void bg_refresh_timer_cb(lv_timer_t *timer) {
     lv_obj_set_style_bg_opa(active_task_label, LV_OPA_COVER, LV_PART_MAIN);
 }
 
+// Add this with the other button callbacks
+static void button_long_press_cb(void *arg, void *data) {
+    ESP_LOGI(TAG, "Button Long Press - Powering Off!");
+    
+    // Show a brief "Powering Off" message
+    lv_obj_t *power_off_msg = lv_label_create(main_container);
+    lv_obj_set_size(power_off_msg, 200, 60);
+    lv_obj_align(power_off_msg, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(power_off_msg, lv_color_hex(0x222222), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(power_off_msg, LV_OPA_COVER, LV_PART_MAIN);
+    lv_obj_set_style_text_color(power_off_msg, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_border_width(power_off_msg, 2, LV_PART_MAIN);
+    lv_obj_set_style_border_color(power_off_msg, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_set_style_text_align(power_off_msg, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+    lv_label_set_text(power_off_msg, "Powering Off...");
+    
+    // Process LVGL tasks to show the message
+    lv_timer_handler();
+    
+    // Wait a moment for the message to be visible
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    
+    // Turn off the device
+    turn_off_device();
+}
+
 void lvgl_demo_ui(lv_disp_t *disp) {
     // Store display for later reference
     lvgl_disp = disp;
@@ -528,6 +557,7 @@ void app_main(void)
 
     // Register button and knob callbacks
     iot_button_register_cb(tembed->dial.btn, BUTTON_PRESS_DOWN, button_press_down_cb, NULL);
+    iot_button_register_cb(tembed->dial.btn, BUTTON_LONG_PRESS_START, button_long_press_cb, NULL);
     iot_knob_register_cb(tembed->dial.knob, KNOB_LEFT, knob_left_cb, NULL);
     iot_knob_register_cb(tembed->dial.knob, KNOB_RIGHT, knob_right_cb, NULL);
 

@@ -2,7 +2,7 @@
 
 I'm building a hardware time tracker and I hope to integrate it with an app
 
-v5.3.x
+v5.0 release
 
 Getting Started
 Plug in your T-Embed. Make sure it is recognized by the OS (I recommend linux)

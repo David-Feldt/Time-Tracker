@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "esp_idf_v5.0_tembed",
-    "project_version":    "a7c4b2c-dirty",
+    "project_version":    "1db22d7-dirty",
     "project_path":       "/Users/david/Projects/Time-Tracker",
     "idf_path":           "/Users/david/esp/v5.0/esp-idf",
     "build_dir":          "/Users/david/Projects/Time-Tracker/build",
