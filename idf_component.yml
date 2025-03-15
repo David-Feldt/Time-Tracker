@@ -1,0 +1,5 @@
+dependencies:
+  espressif/button: "==2.5.0"
+  espressif/knob: "==0.1.0"
+  lvgl/lvgl: "==8.3.0"
+  # Keep other dependencies as they are 

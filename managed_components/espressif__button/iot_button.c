@@ -1,16 +1,8 @@
-// Copyright 2020 Espressif Systems (Shanghai) Co. Ltd.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/* SPDX-FileCopyrightText: 2022-2023 Espressif Systems (Shanghai) CO LTD
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
@@ -23,6 +15,9 @@
 #include "sdkconfig.h"
 
 static const char *TAG = "button";
+static portMUX_TYPE s_button_lock = portMUX_INITIALIZER_UNLOCKED;
+#define BUTTON_ENTER_CRITICAL()           portENTER_CRITICAL(&s_button_lock)
+#define BUTTON_EXIT_CRITICAL()            portEXIT_CRITICAL(&s_button_lock)
 
 #define BTN_CHECK(a, str, ret_val)                                \
     if (!(a)) {                                                   \
@@ -115,7 +110,7 @@ static void button_handler(button_dev_t *btn)
         } else if (btn->ticks > btn->long_press_ticks) {
             btn->event = (uint8_t)BUTTON_LONG_PRESS_START;
             CALL_EVENT_CB(BUTTON_LONG_PRESS_START);
-            btn->state = 5;
+            btn->state = 4;
         }
         break;
 
@@ -123,6 +118,7 @@ static void button_handler(button_dev_t *btn)
         if (btn->button_level == btn->active_level) {
             btn->event = (uint8_t)BUTTON_PRESS_DOWN;
             CALL_EVENT_CB(BUTTON_PRESS_DOWN);
+            btn->event = (uint8_t)BUTTON_PRESS_REPEAT;
             btn->repeat++;
             CALL_EVENT_CB(BUTTON_PRESS_REPEAT); // repeat hit
             btn->ticks = 0;
@@ -137,6 +133,7 @@ static void button_handler(button_dev_t *btn)
             }
             btn->event = (uint8_t)BUTTON_PRESS_REPEAT_DONE;
             CALL_EVENT_CB(BUTTON_PRESS_REPEAT_DONE); // repeat hit
+            btn->repeat = 0;
             btn->state = 0;
         }
         break;
@@ -154,10 +151,10 @@ static void button_handler(button_dev_t *btn)
         }
         break;
 
-    case 5:
+    case 4:
         if (btn->button_level == btn->active_level) {
             //continue hold trigger
-            if (btn->ticks >= (btn->long_press_hold_cnt + 1) * SERIAL_TICKS) {
+            if (btn->ticks >= (btn->long_press_hold_cnt + 1) * SERIAL_TICKS + btn->long_press_ticks) {
                 btn->event = (uint8_t)BUTTON_LONG_PRESS_HOLD;
                 btn->long_press_hold_cnt++;
                 CALL_EVENT_CB(BUTTON_LONG_PRESS_HOLD);
@@ -246,6 +243,7 @@ static esp_err_t button_delete_com(button_dev_t *btn)
 
 button_handle_t iot_button_create(const button_config_t *config)
 {
+    ESP_LOGI(TAG, "IoT Button Version: %d.%d.%d", BUTTON_VER_MAJOR, BUTTON_VER_MINOR, BUTTON_VER_PATCH);
     BTN_CHECK(config, "Invalid button config", NULL);
 
     esp_err_t ret = ESP_OK;
@@ -326,6 +324,7 @@ esp_err_t iot_button_register_cb(button_handle_t btn_handle, button_event_t even
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
     BTN_CHECK(event < BUTTON_EVENT_MAX, "event is invalid", ESP_ERR_INVALID_ARG);
     button_dev_t *btn = (button_dev_t *) btn_handle;
+    BTN_CHECK(NULL == btn->cb[event], "Callback is already registered", ESP_ERR_INVALID_STATE);
     btn->cb[event] = cb;
     btn->usr_data[event] = usr_data;
     return ESP_OK;
@@ -336,6 +335,7 @@ esp_err_t iot_button_unregister_cb(button_handle_t btn_handle, button_event_t ev
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
     BTN_CHECK(event < BUTTON_EVENT_MAX, "event is invalid", ESP_ERR_INVALID_ARG);
     button_dev_t *btn = (button_dev_t *) btn_handle;
+    BTN_CHECK(NULL != btn->cb[event], "Callback is not registered yet", ESP_ERR_INVALID_STATE);
     btn->cb[event] = NULL;
     btn->usr_data[event] = NULL;
     return ESP_OK;
@@ -380,4 +380,23 @@ uint16_t iot_button_get_long_press_hold_cnt(button_handle_t btn_handle)
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", 0);
     button_dev_t *btn = (button_dev_t *) btn_handle;
     return btn->long_press_hold_cnt;
+}
+
+esp_err_t iot_button_set_param(button_handle_t btn_handle, button_param_t param, void *value)
+{
+    BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
+    button_dev_t *btn = (button_dev_t *) btn_handle;
+    BUTTON_ENTER_CRITICAL();
+    switch (param) {
+    case BUTTON_LONG_PRESS_TIME_MS:
+        btn->long_press_ticks = (int32_t)value / TICKS_INTERVAL;
+        break;
+    case BUTTON_SHORT_PRESS_TIME_MS:
+        btn->short_press_ticks = (int32_t)value / TICKS_INTERVAL;
+        break;
+    default:
+        break;
+    }
+    BUTTON_EXIT_CRITICAL();
+    return ESP_OK;
 }

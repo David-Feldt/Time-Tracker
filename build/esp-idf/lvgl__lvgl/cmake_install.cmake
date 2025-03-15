@@ -1,4 +1,4 @@
-# Install script for directory: /home/david/T-Embed/Time-Tracker/time_tracker/managed_components/lvgl__lvgl
+# Install script for directory: /home/david/Time-Tracker/managed_components/lvgl__lvgl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

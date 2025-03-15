@@ -1,4 +1,4 @@
-# Install script for directory: /home/david/T-Embed/Time-Tracker/time_tracker/components/apa102
+# Install script for directory: /home/david/Time-Tracker/components/apa102
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

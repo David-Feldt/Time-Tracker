@@ -1,4 +1,4 @@
-# Install script for directory: /home/david/T-Embed/Time-Tracker/time_tracker/components/tembed
+# Install script for directory: /home/david/Time-Tracker/components/tembed
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

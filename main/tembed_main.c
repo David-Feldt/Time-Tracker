@@ -17,6 +17,19 @@
 #define TAG "tembed"
 #define POWER_ON_GPIO 46
 
+// Forward declarations for dialog callbacks
+static void dialog_yes_cb(lv_event_t *e);
+static void dialog_no_cb(lv_event_t *e);
+
+// Forward declarations for dialog functions
+void update_dialog_selection();
+void trigger_dialog_action();
+void show_confirmation_dialog(const char *message);
+
+// Track which dialog button is selected (0 = Yes, 1 = No)
+int dialog_selected_button = 0;
+lv_obj_t *dialog_yes_btn;
+lv_obj_t *dialog_no_btn;
 
 // ... [LED code remains unchanged] ...
 
@@ -28,7 +41,12 @@ void turn_off_device() {
     gpio_set_level(POWER_ON_GPIO, 0);
 }
 
-#define LABEL_COUNT 3
+// Add confirmation dialog state
+typedef enum {
+    DIALOG_NONE,
+    DIALOG_START_TASK,
+    DIALOG_STOP_TASK
+} dialog_state_t;
 
 typedef struct {
     char *name;                // Label name
@@ -39,16 +57,25 @@ typedef struct {
     uint32_t color;   
 } label_info_t;
 
-// Initialize labels
+// Increase number of labels for more activities
+#define LABEL_COUNT 5
+
+// Initialize labels with more meaningful activity names
 label_info_t labels[LABEL_COUNT] = {
-    {"RED", 0, 0, false, NULL, 0xFF0000},
-    {"GREEN", 0, 0, false, NULL, 0x00FF00},
-    {"BLUE", 0, 0, false, NULL, 0x0000FF},
+    {"Work", 0, 0, false, NULL, 0xFF0000},
+    {"Study", 0, 0, false, NULL, 0x00FF00},
+    {"Exercise", 0, 0, false, NULL, 0x0000FF},
+    {"Reading", 0, 0, false, NULL, 0xFFAA00},
+    {"Break", 0, 0, false, NULL, 0xAA00FF},
 };
 
 int selected_label_index = 0;  // Currently selected label index
+dialog_state_t current_dialog = DIALOG_NONE;
+int running_label_index = -1;  // Track which label is currently running
 
 lv_obj_t *info_label;
+lv_obj_t *dialog_box;
+lv_obj_t *active_task_label;
 lv_timer_t *timer;
 lv_disp_t *lvgl_disp;
 
@@ -74,8 +101,20 @@ void update_label_info_display()
     label_info_t *label = &labels[selected_label_index];
     uint32_t total_time_sec = label->total_time_ms / 1000;
     uint32_t current_time_sec = label->current_time_ms / 1000;
-    lv_label_set_text_fmt(info_label, "%s\nTotal Time: %d s\nCurrent Time: %d s",
-                          label->name, total_time_sec, current_time_sec);
+    
+    // Calculate hours, minutes, seconds for better readability
+    uint32_t total_hours = total_time_sec / 3600;
+    uint32_t total_mins = (total_time_sec % 3600) / 60;
+    uint32_t total_secs = total_time_sec % 60;
+    
+    uint32_t current_hours = current_time_sec / 3600;
+    uint32_t current_mins = (current_time_sec % 3600) / 60;
+    uint32_t current_secs = current_time_sec % 60;
+    
+    lv_label_set_text_fmt(info_label, "%s\nTotal: %02d:%02d:%02d\nCurrent: %02d:%02d:%02d",
+                          label->name, 
+                          total_hours, total_mins, total_secs,
+                          current_hours, current_mins, current_secs);
 }
 
 void update_label_positions()
@@ -95,53 +134,180 @@ void update_label_positions()
 
 static void knob_left_cb(void *arg, void *data)
 {
-    // Decrease selected_label_index with wrap-around
+    if (dialog_box != NULL) {
+        // If dialog is active, change selection
+        dialog_selected_button = 0; // Select "Yes"
+        update_dialog_selection();
+        return;
+    }
+    
+    // Existing code for when no dialog is active
     selected_label_index = (selected_label_index - 1 + LABEL_COUNT) % LABEL_COUNT;
     ESP_LOGI(TAG, "KNOB: KNOB_LEFT Selected Label Index is %d", selected_label_index);
     update_selected_label_visuals();
     update_label_info_display();
     update_label_positions();
-
 }
 
 static void knob_right_cb(void *arg, void *data)
 {
-    // Increase selected_label_index with wrap-around
+    if (dialog_box != NULL) {
+        // If dialog is active, change selection
+        dialog_selected_button = 1; // Select "No"
+        update_dialog_selection();
+        return;
+    }
+    
+    // Existing code for when no dialog is active
     selected_label_index = (selected_label_index + 1) % LABEL_COUNT;
     ESP_LOGI(TAG, "KNOB: KNOB_RIGHT Selected Label Index is %d", selected_label_index);
     update_selected_label_visuals();
     update_label_info_display();
     update_label_positions();
+}
 
+// Create and show a confirmation dialog
+void show_confirmation_dialog(const char *message) {
+    if (dialog_box != NULL) {
+        lv_obj_del(dialog_box);
+    }
+    
+    dialog_selected_button = 0; // Default select "Yes"
+    
+    dialog_box = lv_obj_create(lv_disp_get_scr_act(lvgl_disp));
+    lv_obj_set_size(dialog_box, 200, 120);
+    lv_obj_align(dialog_box, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(dialog_box, lv_color_hex(0x404040), LV_PART_MAIN);
+    lv_obj_set_style_border_width(dialog_box, 2, LV_PART_MAIN);
+    lv_obj_set_style_border_color(dialog_box, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    
+    lv_obj_t *msg_label = lv_label_create(dialog_box);
+    lv_label_set_text(msg_label, message);
+    lv_obj_align(msg_label, LV_ALIGN_TOP_MID, 0, 10);
+    
+    dialog_yes_btn = lv_btn_create(dialog_box);
+    lv_obj_set_size(dialog_yes_btn, 70, 40);
+    lv_obj_align(dialog_yes_btn, LV_ALIGN_BOTTOM_LEFT, 20, -10);
+    lv_obj_add_event_cb(dialog_yes_btn, dialog_yes_cb, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t *yes_label = lv_label_create(dialog_yes_btn);
+    lv_label_set_text(yes_label, "Yes");
+    lv_obj_center(yes_label);
+    
+    dialog_no_btn = lv_btn_create(dialog_box);
+    lv_obj_set_size(dialog_no_btn, 70, 40);
+    lv_obj_align(dialog_no_btn, LV_ALIGN_BOTTOM_RIGHT, -20, -10);
+    lv_obj_add_event_cb(dialog_no_btn, dialog_no_cb, LV_EVENT_CLICKED, NULL);
+    
+    lv_obj_t *no_label = lv_label_create(dialog_no_btn);
+    lv_label_set_text(no_label, "No");
+    lv_obj_center(no_label);
+    
+    // Set initial selection highlight
+    update_dialog_selection();
+}
+
+// Update the visual selection in the dialog
+void update_dialog_selection() {
+    if (dialog_box == NULL) return;
+    
+    // Reset both buttons to default state
+    lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0x2196F3), LV_PART_MAIN); // Default blue
+    lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0x2196F3), LV_PART_MAIN); // Default blue
+    
+    // Highlight the selected button
+    if (dialog_selected_button == 0) {
+        lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN); // Green for selection
+    } else {
+        lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN); // Green for selection
+    }
+}
+
+// Handle dialog action based on current selection
+void trigger_dialog_action() {
+    if (dialog_box == NULL) return;
+    
+    if (dialog_selected_button == 0) {
+        dialog_yes_cb(NULL); // Trigger Yes action
+    } else {
+        dialog_no_cb(NULL); // Trigger No action
+    }
+}
+
+// Process dialog "Yes" response
+static void dialog_yes_cb(lv_event_t *e) {
+    if (current_dialog == DIALOG_START_TASK) {
+        // Stop any currently running timer
+        if (running_label_index >= 0) {
+            label_info_t *prev_label = &labels[running_label_index];
+            prev_label->timer_running = false;
+            prev_label->total_time_ms += prev_label->current_time_ms;
+            prev_label->current_time_ms = 0;
+            ESP_LOGI(TAG, "Stopped timer for label %s", prev_label->name);
+        }
+        
+        // Start the new timer
+        label_info_t *label = &labels[selected_label_index];
+        label->timer_running = true;
+        label->current_time_ms = 0;
+        running_label_index = selected_label_index;
+        ESP_LOGI(TAG, "Started timer for label %s", label->name);
+        
+        // Update the active task display
+        lv_label_set_text_fmt(active_task_label, "Active: %s", label->name);
+        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(label->color), LV_PART_MAIN);
+    } 
+    else if (current_dialog == DIALOG_STOP_TASK) {
+        // Stop the current timer
+        label_info_t *label = &labels[selected_label_index];
+        label->timer_running = false;
+        label->total_time_ms += label->current_time_ms;
+        label->current_time_ms = 0;
+        running_label_index = -1;
+        ESP_LOGI(TAG, "Stopped timer for label %s", label->name);
+        
+        // Update the active task display
+        lv_label_set_text(active_task_label, "No Active Task");
+        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0x808080), LV_PART_MAIN);
+    }
+    
+    // Close the dialog
+    lv_obj_del(dialog_box);
+    dialog_box = NULL;
+    current_dialog = DIALOG_NONE;
+    
+    update_label_info_display();
+}
+
+// Process dialog "No" response
+static void dialog_no_cb(lv_event_t *e) {
+    // Just close the dialog without taking action
+    lv_obj_del(dialog_box);
+    dialog_box = NULL;
+    current_dialog = DIALOG_NONE;
 }
 
 static void button_press_down_cb(void *arg, void *data) {
     ESP_LOGI(TAG, "Button Pressed Down!");
+    
+    // If dialog is open, trigger the selected action
+    if (dialog_box != NULL) {
+        trigger_dialog_action();
+        return;
+    }
+    
+    // Existing code for when no dialog is active
     label_info_t *label = &labels[selected_label_index];
 
     if (label->timer_running) {
-        // Stop the timer for this label
-        label->timer_running = false;
-        label->total_time_ms += label->current_time_ms;
-        label->current_time_ms = 0;
-        ESP_LOGI(TAG, "Stopped timer for label %s", label->name);
+        // Show stop confirmation dialog
+        current_dialog = DIALOG_STOP_TASK;
+        show_confirmation_dialog("Stop timer for this task?");
     } else {
-        // Stop any other running timers
-        for (int i = 0; i < LABEL_COUNT; i++) {
-            if (labels[i].timer_running) {
-                labels[i].timer_running = false;
-                labels[i].total_time_ms += labels[i].current_time_ms;
-                labels[i].current_time_ms = 0;
-                break;
-            }
-        }
-        // Start the timer for the selected label
-        label->timer_running = true;
-        label->current_time_ms = 0;
-        ESP_LOGI(TAG, "Started timer for label %s", label->name);
+        // Show start confirmation dialog
+        current_dialog = DIALOG_START_TASK;
+        show_confirmation_dialog("Start timer for this task?");
     }
-
-    update_label_info_display();
 }
 
 void timer_callback(lv_timer_t * timer)
@@ -160,20 +326,18 @@ void lvgl_demo_ui(lv_disp_t *disp) {
     /*Change the active screen's background color*/
     lv_obj_set_style_bg_color(lv_disp_get_scr_act(disp), lv_color_hex(0x00FF00), LV_PART_MAIN);
 
-    // static lv_style_t l_style;
-    // lv_style_init(&l_style);
-    // lv_style_set_width(&l_style, 75);
-    // lv_style_set_height(&l_style, 40);
-    // lv_style_set_text_color(&l_style, lv_color_white());
-    // lv_style_set_text_align(&l_style, LV_TEXT_ALIGN_CENTER);
-    // lv_style_set_bg_opa(&l_style, LV_OPA_COVER);
+    // Create a top panel for active task display
+    lv_obj_t *top_panel = lv_obj_create(lv_disp_get_scr_act(disp));
+    lv_obj_set_size(top_panel, 240, 40);
+    lv_obj_align(top_panel, LV_ALIGN_TOP_MID, 0, 0);
+    lv_obj_set_style_bg_color(top_panel, lv_color_hex(0x404040), LV_PART_MAIN);
+    
+    active_task_label = lv_label_create(top_panel);
+    lv_label_set_text(active_task_label, "No Active Task");
+    lv_obj_set_style_text_color(active_task_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_center(active_task_label);
 
-    // /*Create a container with ROW flex direction*/
-    // lv_obj_t * cont_row = lv_obj_create(lv_disp_get_scr_act(disp));
-    // lv_obj_set_size(cont_row, 300, 75);
-    // lv_obj_align(cont_row, LV_ALIGN_TOP_MID, 0, 5);
-    // lv_obj_set_flex_flow(cont_row, LV_FLEX_FLOW_ROW);
-    // lv_obj_set_style_bg_color(cont_row, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
+    // Create task selection circle
     lv_obj_t *circle_bg = lv_obj_create(lv_disp_get_scr_act(disp));
     lv_obj_set_size(circle_bg, 125, 125); // Adjust size as needed
     lv_obj_align(circle_bg, LV_ALIGN_CENTER, -75, 0);
@@ -196,24 +360,11 @@ void lvgl_demo_ui(lv_disp_t *disp) {
         label = lv_label_create(lv_disp_get_scr_act(disp));
         lv_label_set_text_static(label, labels[i].name);
         lv_obj_add_style(label, &l_style, LV_PART_MAIN);
-        // Set background color based on label
-        // if (i == 0) {
-        //     lv_obj_set_style_bg_color(label, lv_color_hex(0xff0000), LV_PART_MAIN);
-        // } else if (i == 1) {
-        //     lv_obj_set_style_bg_color(label, lv_palette_main(LV_PALETTE_GREEN), LV_PART_MAIN);
-        // } else if (i == 2) {
-        //     lv_obj_set_style_bg_color(label, lv_palette_main(LV_PALETTE_BLUE), LV_PART_MAIN);
-        // }
         lv_obj_set_style_bg_color(label, lv_color_hex(labels[i].color), LV_PART_MAIN);
-        // float angle = (2 * M_PI / LABEL_COUNT) * i; // Evenly distribute around the circle
-        // int x = 75 * cos(angle) -75;
-        // int y = 75 * sin(angle);
-        // lv_obj_align(label, LV_ALIGN_CENTER, x, y);
         lv_obj_set_size(label, 60, 20); 
-        // lv_obj_center(label);
         labels[i].lv_label = label;
     }
-        update_label_positions();
+    update_label_positions();
 
     // Create a label to display the current title and times
     info_label = lv_label_create(lv_disp_get_scr_act(disp));
@@ -250,7 +401,7 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Display LVGL");
     lvgl_demo_ui(lvgl_disp);
-    turn_off_device();
+    // turn_off_device();
 
     while (1) {
         // LVGL timer handler
