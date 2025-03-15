@@ -26,12 +26,28 @@ void update_dialog_selection();
 void trigger_dialog_action();
 void show_confirmation_dialog(const char *message);
 
+// Forward declarations for UI update functions
+void update_label_info_display();
+void update_time_panel();
+void update_selected_label_visuals();
+void update_label_positions();
+
 // Track which dialog button is selected (0 = Yes, 1 = No)
 int dialog_selected_button = 0;
 lv_obj_t *dialog_yes_btn;
 lv_obj_t *dialog_no_btn;
 
-// ... [LED code remains unchanged] ...
+// Add with other global variables
+static lv_timer_t *timer;
+static lv_timer_t *bg_refresh_timer;
+
+// Add this function prototype before lvgl_demo_ui
+static void bg_refresh_timer_cb(lv_timer_t *timer);
+
+// Add these to store direct references
+static lv_obj_t *main_container;
+static lv_obj_t *left_panel;
+static lv_obj_t *right_panel;
 
 void turn_off_device() {
     // Set the GPIO pin as output
@@ -62,11 +78,11 @@ typedef struct {
 
 // Initialize labels with more meaningful activity names
 label_info_t labels[LABEL_COUNT] = {
-    {"Work", 0, 0, false, NULL, 0xFF0000},
-    {"Study", 0, 0, false, NULL, 0x00FF00},
-    {"Exercise", 0, 0, false, NULL, 0x0000FF},
-    {"Reading", 0, 0, false, NULL, 0xFFAA00},
-    {"Break", 0, 0, false, NULL, 0xAA00FF},
+    {"Work", 0, 0, false, NULL, 0x444444},
+    {"Study", 0, 0, false, NULL, 0x444444},
+    {"Exercise", 0, 0, false, NULL, 0x444444},
+    {"Reading", 0, 0, false, NULL, 0x444444},
+    {"Break", 0, 0, false, NULL, 0x444444},
 };
 
 int selected_label_index = 0;  // Currently selected label index
@@ -76,61 +92,57 @@ int running_label_index = -1;  // Track which label is currently running
 lv_obj_t *info_label;
 lv_obj_t *dialog_box;
 lv_obj_t *active_task_label;
-lv_timer_t *timer;
 lv_disp_t *lvgl_disp;
 
 void update_selected_label_visuals()
 {
     for (int i = 0; i < LABEL_COUNT; i++) {
+        // First reset all to default state
+        lv_obj_set_style_bg_color(labels[i].lv_label, lv_color_hex(0x333333), LV_PART_MAIN);
+        lv_obj_set_style_text_color(labels[i].lv_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        
+        // Then apply special styling
         if (i == selected_label_index) {
-            // Highlight the selected label
-            lv_obj_set_style_outline_width(labels[i].lv_label, 2, LV_PART_MAIN);
-            lv_obj_set_style_outline_color(labels[i].lv_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-            lv_obj_set_style_outline_opa(labels[i].lv_label, LV_OPA_COVER, LV_PART_MAIN);
-            lv_obj_set_style_bg_color(lv_disp_get_scr_act(lvgl_disp), lv_color_hex(labels[i].color), LV_PART_MAIN);
-
-        } else {
-            // Remove highlight from other labels
-            lv_obj_set_style_outline_width(labels[i].lv_label, 0, LV_PART_MAIN);
+            // Selected label gets white background with black text
+            lv_obj_set_style_bg_color(labels[i].lv_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+            lv_obj_set_style_text_color(labels[i].lv_label, lv_color_hex(0x000000), LV_PART_MAIN);
+        } else if (i == running_label_index) {
+            // Running task gets light gray
+            lv_obj_set_style_bg_color(labels[i].lv_label, lv_color_hex(0xAAAAAA), LV_PART_MAIN);
+            lv_obj_set_style_text_color(labels[i].lv_label, lv_color_hex(0x000000), LV_PART_MAIN);
         }
     }
 }
 
-void update_label_info_display()
-{
-    label_info_t *label = &labels[selected_label_index];
-    uint32_t total_time_sec = label->total_time_ms / 1000;
-    uint32_t current_time_sec = label->current_time_ms / 1000;
-    
-    // Calculate hours, minutes, seconds for better readability
-    uint32_t total_hours = total_time_sec / 3600;
-    uint32_t total_mins = (total_time_sec % 3600) / 60;
-    uint32_t total_secs = total_time_sec % 60;
-    
-    uint32_t current_hours = current_time_sec / 3600;
-    uint32_t current_mins = (current_time_sec % 3600) / 60;
-    uint32_t current_secs = current_time_sec % 60;
-    
-    lv_label_set_text_fmt(info_label, "%s\nTotal: %02d:%02d:%02d\nCurrent: %02d:%02d:%02d",
-                          label->name, 
-                          total_hours, total_mins, total_secs,
-                          current_hours, current_mins, current_secs);
-}
-
 void update_label_positions()
 {
-    int radius = 75;
+    int item_height = 40;  // Height of each item in the list
+    int vertical_spacing = 10;  // Space between items
+    int total_item_height = item_height + vertical_spacing;
+    int middle_y = 85;  // Middle of the screen vertically (170/2)
+    
     for (int i = 0; i < LABEL_COUNT; i++) {
-        int index = (i - selected_label_index + LABEL_COUNT) % LABEL_COUNT;
-        float angle = (2 * M_PI / LABEL_COUNT) * index;
-        int x = radius * cos(angle)-75;
-        int y = radius * sin(angle);
-        lv_obj_align(labels[i].lv_label, LV_ALIGN_CENTER, x, y);
-        //lv_obj_set_size(labels[i].lv_label, 60, 20); 
-        //lv_obj_center(labels[i].lv_label);
+        // Calculate index relative to the selected item
+        int relative_idx = i - selected_label_index;
+        
+        // Handle wrap-around for infinite scroll effect
+        if (relative_idx < -(LABEL_COUNT/2)) relative_idx += LABEL_COUNT;
+        if (relative_idx > LABEL_COUNT/2) relative_idx -= LABEL_COUNT;
+        
+        // Position vertically with the selected item in the middle
+        int y = middle_y + (relative_idx * total_item_height);
+        
+        // Position all items on the right half
+        lv_obj_align(labels[i].lv_label, LV_ALIGN_RIGHT_MID, -20, y - middle_y);
+        
+        // Resize labels to show more information
+        lv_obj_set_size(labels[i].lv_label, 100, item_height); 
+        
+        // Update the label text to include total minutes spent
+        uint32_t total_mins = labels[i].total_time_ms / (60 * 1000);
+        lv_label_set_text_fmt(labels[i].lv_label, "%s [%dm]", labels[i].name, total_mins);
     }
 }
-
 
 static void knob_left_cb(void *arg, void *data)
 {
@@ -174,10 +186,12 @@ void show_confirmation_dialog(const char *message) {
     
     dialog_selected_button = 0; // Default select "Yes"
     
-    dialog_box = lv_obj_create(lv_disp_get_scr_act(lvgl_disp));
+    // Create dialog directly on main container, not screen
+    dialog_box = lv_obj_create(main_container);
     lv_obj_set_size(dialog_box, 200, 120);
     lv_obj_align(dialog_box, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_set_style_bg_color(dialog_box, lv_color_hex(0x404040), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(dialog_box, lv_color_hex(0x222222), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(dialog_box, LV_OPA_COVER, LV_PART_MAIN);
     lv_obj_set_style_border_width(dialog_box, 2, LV_PART_MAIN);
     lv_obj_set_style_border_color(dialog_box, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
     
@@ -189,6 +203,7 @@ void show_confirmation_dialog(const char *message) {
     lv_obj_set_size(dialog_yes_btn, 70, 40);
     lv_obj_align(dialog_yes_btn, LV_ALIGN_BOTTOM_LEFT, 20, -10);
     lv_obj_add_event_cb(dialog_yes_btn, dialog_yes_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0x444444), LV_PART_MAIN);
     
     lv_obj_t *yes_label = lv_label_create(dialog_yes_btn);
     lv_label_set_text(yes_label, "Yes");
@@ -198,6 +213,7 @@ void show_confirmation_dialog(const char *message) {
     lv_obj_set_size(dialog_no_btn, 70, 40);
     lv_obj_align(dialog_no_btn, LV_ALIGN_BOTTOM_RIGHT, -20, -10);
     lv_obj_add_event_cb(dialog_no_btn, dialog_no_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0x444444), LV_PART_MAIN);
     
     lv_obj_t *no_label = lv_label_create(dialog_no_btn);
     lv_label_set_text(no_label, "No");
@@ -211,15 +227,17 @@ void show_confirmation_dialog(const char *message) {
 void update_dialog_selection() {
     if (dialog_box == NULL) return;
     
-    // Reset both buttons to default state
-    lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0x2196F3), LV_PART_MAIN); // Default blue
-    lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0x2196F3), LV_PART_MAIN); // Default blue
+    // Reset both buttons to default state (dark gray)
+    lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0x444444), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0x444444), LV_PART_MAIN);
     
-    // Highlight the selected button
+    // Highlight the selected button with white background and black text
     if (dialog_selected_button == 0) {
-        lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN); // Green for selection
+        lv_obj_set_style_bg_color(dialog_yes_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_text_color(lv_obj_get_child(dialog_yes_btn, 0), lv_color_hex(0x000000), LV_PART_MAIN);
     } else {
-        lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0x4CAF50), LV_PART_MAIN); // Green for selection
+        lv_obj_set_style_bg_color(dialog_no_btn, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_text_color(lv_obj_get_child(dialog_no_btn, 0), lv_color_hex(0x000000), LV_PART_MAIN);
     }
 }
 
@@ -253,9 +271,10 @@ static void dialog_yes_cb(lv_event_t *e) {
         running_label_index = selected_label_index;
         ESP_LOGI(TAG, "Started timer for label %s", label->name);
         
-        // Update the active task display
+        // Update the active task display (gray instead of color)
         lv_label_set_text_fmt(active_task_label, "Active: %s", label->name);
-        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(label->color), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0xAAAAAA), LV_PART_MAIN);
+        lv_obj_set_style_text_color(active_task_label, lv_color_hex(0x000000), LV_PART_MAIN);
     } 
     else if (current_dialog == DIALOG_STOP_TASK) {
         // Stop the current timer
@@ -268,7 +287,8 @@ static void dialog_yes_cb(lv_event_t *e) {
         
         // Update the active task display
         lv_label_set_text(active_task_label, "No Active Task");
-        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0x808080), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0x333333), LV_PART_MAIN);
+        lv_obj_set_style_text_color(active_task_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
     }
     
     // Close the dialog
@@ -315,97 +335,200 @@ void timer_callback(lv_timer_t * timer)
     for (int i = 0; i < LABEL_COUNT; i++) {
         if (labels[i].timer_running) {
             labels[i].current_time_ms += 100;  // Update every 100 ms
+            
+            // Update time display and label text with minutes
             if (i == selected_label_index) {
-                update_label_info_display();
+                update_time_panel();
             }
+            
+            // Update the minute count in the label text
+            uint32_t total_mins = labels[i].total_time_ms / (60 * 1000);
+            uint32_t current_mins = labels[i].current_time_ms / (60 * 1000);
+            lv_label_set_text_fmt(labels[i].lv_label, "%s [%dm]", 
+                                 labels[i].name, total_mins + current_mins);
         }
     }
 }
 
-void lvgl_demo_ui(lv_disp_t *disp) {
-    /*Change the active screen's background color*/
-    lv_obj_set_style_bg_color(lv_disp_get_scr_act(disp), lv_color_hex(0x00FF00), LV_PART_MAIN);
-
-    // Create a top panel for active task display
-    lv_obj_t *top_panel = lv_obj_create(lv_disp_get_scr_act(disp));
-    lv_obj_set_size(top_panel, 240, 40);
-    lv_obj_align(top_panel, LV_ALIGN_TOP_MID, 0, 0);
-    lv_obj_set_style_bg_color(top_panel, lv_color_hex(0x404040), LV_PART_MAIN);
+// Create a detailed time display for the left bottom panel
+void update_time_panel() {
+    if (selected_label_index < 0 || selected_label_index >= LABEL_COUNT) return;
     
-    active_task_label = lv_label_create(top_panel);
+    label_info_t *label = &labels[selected_label_index];
+    uint32_t total_time_sec = label->total_time_ms / 1000;
+    uint32_t current_time_sec = label->current_time_ms / 1000;
+    
+    // Calculate hours, minutes, seconds for better readability
+    uint32_t total_hours = total_time_sec / 3600;
+    uint32_t total_mins = (total_time_sec % 3600) / 60;
+    uint32_t total_secs = total_time_sec % 60;
+    
+    uint32_t current_hours = current_time_sec / 3600;
+    uint32_t current_mins = (current_time_sec % 3600) / 60;
+    uint32_t current_secs = current_time_sec % 60;
+    
+    lv_label_set_text_fmt(info_label, "Selected: %s\n\nTotal Time\n%02d:%02d:%02d\n\nCurrent Session\n%02d:%02d:%02d",
+                         label->name, 
+                         total_hours, total_mins, total_secs,
+                         current_hours, current_mins, current_secs);
+}
+
+// Update the background refresh timer to explicitly set opacity
+static void bg_refresh_timer_cb(lv_timer_t *timer) {
+    ESP_LOGI(TAG, "Refreshing background colors");
+    
+    // Force update screen background to pure black
+    lv_obj_set_style_bg_color(lv_disp_get_scr_act(lvgl_disp), lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(lv_disp_get_scr_act(lvgl_disp), LV_OPA_COVER, LV_PART_MAIN);
+    
+    // Brute force approach - reset ALL objects' backgrounds
+    uint32_t child_cnt = lv_obj_get_child_cnt(lv_disp_get_scr_act(lvgl_disp));
+    for(uint32_t i = 0; i < child_cnt; i++) {
+        lv_obj_t *child = lv_obj_get_child(lv_disp_get_scr_act(lvgl_disp), i);
+        // Set all panel backgrounds to black
+        lv_obj_set_style_bg_color(child, lv_color_hex(0x000000), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(child, LV_OPA_COVER, LV_PART_MAIN);
+    }
+    
+    // Force update all labels
+    for (int i = 0; i < LABEL_COUNT; i++) {
+        if (i == running_label_index) {
+            lv_obj_set_style_bg_color(labels[i].lv_label, lv_color_hex(0xAAAAAA), LV_PART_MAIN);
+        } else {
+            lv_obj_set_style_bg_color(labels[i].lv_label, lv_color_hex(0x333333), LV_PART_MAIN);
+        }
+        lv_obj_set_style_bg_opa(labels[i].lv_label, LV_OPA_COVER, LV_PART_MAIN);
+    }
+    
+    // Force update active task label
+    if (running_label_index >= 0) {
+        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0xAAAAAA), LV_PART_MAIN);
+    } else {
+        lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0x333333), LV_PART_MAIN);
+    }
+    lv_obj_set_style_bg_opa(active_task_label, LV_OPA_COVER, LV_PART_MAIN);
+}
+
+void lvgl_demo_ui(lv_disp_t *disp) {
+    // Store display for later reference
+    lvgl_disp = disp;
+    
+    // First, disable any built-in themes completely
+    lv_disp_set_theme(disp, NULL);
+    
+    // Get screen and set it to pure black
+    lv_obj_t *scr = lv_disp_get_scr_act(disp);
+    lv_obj_set_style_bg_color(scr, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(scr, LV_OPA_COVER, LV_PART_MAIN);
+    
+    // Create a single main container that covers the whole screen
+    main_container = lv_obj_create(scr);
+    lv_obj_set_size(main_container, 320, 170);
+    lv_obj_align(main_container, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(main_container, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(main_container, LV_OPA_COVER, LV_PART_MAIN);
+    lv_obj_set_style_border_width(main_container, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_all(main_container, 0, LV_PART_MAIN);
+    
+    // Create left panel (for active task and time display)
+    left_panel = lv_obj_create(main_container);
+    lv_obj_set_size(left_panel, 160, 170);
+    lv_obj_align(left_panel, LV_ALIGN_LEFT_MID, 0, 0);
+    lv_obj_set_style_bg_color(left_panel, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(left_panel, LV_OPA_COVER, LV_PART_MAIN);
+    lv_obj_set_style_border_width(left_panel, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_all(left_panel, 0, LV_PART_MAIN);
+    
+    // Create right panel (for tasks)
+    right_panel = lv_obj_create(main_container);
+    lv_obj_set_size(right_panel, 160, 170);
+    lv_obj_align(right_panel, LV_ALIGN_RIGHT_MID, 0, 0);
+    lv_obj_set_style_bg_color(right_panel, lv_color_hex(0x000000), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(right_panel, LV_OPA_COVER, LV_PART_MAIN);
+    lv_obj_set_style_border_width(right_panel, 0, LV_PART_MAIN);
+    lv_obj_set_style_pad_all(right_panel, 0, LV_PART_MAIN);
+    
+    // Create active task label directly on left panel 
+    active_task_label = lv_label_create(left_panel);
+    lv_obj_set_size(active_task_label, 140, 40);
     lv_label_set_text(active_task_label, "No Active Task");
     lv_obj_set_style_text_color(active_task_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-    lv_obj_center(active_task_label);
-
-    // Create task selection circle
-    lv_obj_t *circle_bg = lv_obj_create(lv_disp_get_scr_act(disp));
-    lv_obj_set_size(circle_bg, 125, 125); // Adjust size as needed
-    lv_obj_align(circle_bg, LV_ALIGN_CENTER, -75, 0);
-    lv_obj_set_style_bg_color(circle_bg, lv_color_hex(0xCCCCCC), LV_PART_MAIN); // Light gray
-    lv_obj_set_style_bg_opa(circle_bg, LV_OPA_COVER, LV_PART_MAIN);
-    lv_obj_set_style_radius(circle_bg, 150, LV_PART_MAIN); // Make it circular
-
-    static lv_style_t l_style;
-    lv_style_init(&l_style);
-    lv_style_set_width(&l_style, 75);
-    lv_style_set_height(&l_style, 40);
-    lv_style_set_text_color(&l_style, lv_color_white());
-    lv_style_set_text_align(&l_style, LV_TEXT_ALIGN_CENTER);
-    lv_style_set_bg_color(&l_style, lv_palette_main(LV_PALETTE_BLUE));
-    lv_style_set_bg_opa(&l_style, LV_OPA_COVER);
-    lv_obj_t * label;
-
-    /*Add items to the row*/
-    for (int i = 0; i < LABEL_COUNT; i++) {
-        label = lv_label_create(lv_disp_get_scr_act(disp));
-        lv_label_set_text_static(label, labels[i].name);
-        lv_obj_add_style(label, &l_style, LV_PART_MAIN);
-        lv_obj_set_style_bg_color(label, lv_color_hex(labels[i].color), LV_PART_MAIN);
-        lv_obj_set_size(label, 60, 20); 
-        labels[i].lv_label = label;
-    }
-    update_label_positions();
-
-    // Create a label to display the current title and times
-    info_label = lv_label_create(lv_disp_get_scr_act(disp));
+    lv_obj_set_style_bg_color(active_task_label, lv_color_hex(0x333333), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(active_task_label, LV_OPA_COVER, LV_PART_MAIN);
+    lv_obj_set_style_radius(active_task_label, 5, LV_PART_MAIN);
+    lv_obj_align(active_task_label, LV_ALIGN_TOP_MID, 0, 15);
+    
+    // Create time info label
+    info_label = lv_label_create(left_panel);
+    lv_obj_set_size(info_label, 140, 80);
     lv_label_set_text(info_label, "");
-    lv_obj_set_style_text_color(info_label, lv_color_hex(0xffffff), LV_PART_MAIN);
-    lv_obj_align(info_label, LV_ALIGN_BOTTOM_MID, 50, -10);
-    lv_obj_set_style_bg_color(info_label, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
-    lv_obj_set_style_bg_opa(info_label, LV_OPA_COVER, LV_PART_MAIN);
-
+    lv_obj_set_style_text_color(info_label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+    lv_obj_align(info_label, LV_ALIGN_BOTTOM_MID, 0, -15);
+    
+    // Create task labels directly on right panel
+    for (int i = 0; i < LABEL_COUNT; i++) {
+        // Force color to normal gray in the struct
+        labels[i].color = 0x333333;
+        
+        // Create the label object directly - no style inheritance
+        lv_obj_t *label = lv_label_create(right_panel);
+        lv_obj_set_size(label, 120, 30);
+        
+        // Set very explicit styles
+        lv_obj_set_style_bg_color(label, lv_color_hex(0x333333), LV_PART_MAIN);  
+        lv_obj_set_style_bg_opa(label, LV_OPA_COVER, LV_PART_MAIN);
+        lv_obj_set_style_text_color(label, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+        lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);
+        lv_obj_set_style_radius(label, 5, LV_PART_MAIN);
+        
+        // Add initial text
+        lv_label_set_text_fmt(label, "%s [0m]", labels[i].name);
+        
+        // Store for later reference
+        labels[i].lv_label = label;
+        
+        ESP_LOGI(TAG, "Created label %d with explicit gray bg (0x333333)", i);
+    }
+    
+    // Update positions and visuals
+    update_label_positions();
     update_selected_label_visuals();
-    update_label_info_display();
-
-    // Create a timer to update the running timer's current time
-    timer = lv_timer_create(timer_callback, 100, NULL);  // Call every 100 ms
+    update_time_panel();
+    
+    // Create the timer for updating the running timer display
+    timer = lv_timer_create(timer_callback, 100, NULL);
 }
 
 void app_main(void)
 {
     ESP_LOGI(TAG,"Hello lcd!");
 
-    // ... [Existing initialization code remains unchanged] ...
-
     // Initialize the T-Embed
     tembed_t tembed = tembed_init(notify_lvgl_flush_ready, &lvgl_disp_drv);
 
-    // leds(tembed);
-
+    // Register button and knob callbacks
     iot_button_register_cb(tembed->dial.btn, BUTTON_PRESS_DOWN, button_press_down_cb, NULL);
-
     iot_knob_register_cb(tembed->dial.knob, KNOB_LEFT, knob_left_cb, NULL);
     iot_knob_register_cb(tembed->dial.knob, KNOB_RIGHT, knob_right_cb, NULL);
 
+    // Initialize LVGL
     lvgl_disp = tembed_lvgl_init(tembed);
+    
+    // DISABLE ANY THEMES
+    lv_disp_set_theme(lvgl_disp, NULL);
 
     ESP_LOGI(TAG, "Display LVGL");
     lvgl_demo_ui(lvgl_disp);
-    // turn_off_device();
 
     while (1) {
         // LVGL timer handler
         vTaskDelay(pdMS_TO_TICKS(10));
         lv_timer_handler();
     }
+}
+
+// Replace the existing update_label_info_display with a call to update_time_panel
+void update_label_info_display()
+{
+    update_time_panel();
 }
